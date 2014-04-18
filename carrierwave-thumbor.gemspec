@@ -5,7 +5,7 @@ require 'carrierwave/thumbor/version'
 
 Gem::Specification.new do |spec|
   spec.name          = "carrierwave-thumbor"
-  spec.version       = Carrierwave::Thumbor::VERSION
+  spec.version       = CarrierWave::Thumbor::VERSION
   spec.authors       = ["Mikhail Kuzmin"]
   spec.email         = ["m.kuzmin@darkleaf.ru"]
   spec.summary       = %q{TODO: Write a short summary. Required.}
@@ -18,6 +18,8 @@ Gem::Specification.new do |spec|
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = ["lib"]
 
+  spec.add_dependency "carrierwave", "~> 0.10.0"
   spec.add_development_dependency "bundler", "~> 1.6"
-  spec.add_development_dependency "rake"
+  spec.add_development_dependency "rake", "~> 10.3.0"
+  spec.add_development_dependency "rspec", "~> 2.14.0"
 end
