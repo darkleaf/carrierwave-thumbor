@@ -17,7 +17,7 @@ module CarrierWave
         private
 
         def identifier_from_location(location)
-          location[/\A\/image\/(.*)/, 1]
+          location[/\A\/image(.*)/, 1]
         end
       end
 

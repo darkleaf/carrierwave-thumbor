@@ -7,8 +7,7 @@ describe CarrierWave::Storage::Thumbor do
   describe 'Uploader' do
     before do
       CarrierWave.configure do |config|
-        #config.thumbor_url = 'localhost:8888/image'
-        config.thumbor_url = 'http://img.staging.nptv.home'
+        config.thumbor_url = 'localhost:8888/image'
       end
 
       @uploader = Uploader.new
@@ -16,10 +15,12 @@ describe CarrierWave::Storage::Thumbor do
     end
 
     it 'store' do
+      identifier = "/some_hash/some_file.jpg"
+      stub = stub_request(:post, "#{@uploader.thumbor_url}/image").to_return(status: 200, body: '', headers: {location: "/image#{identifier}"})
+
       @uploader.store! @image
-
-      p @uploader.url
-
+      expect(@uploader.identifier).to eq(identifier)
+      expect(stub).to have_been_requested
     end
   end
 end
