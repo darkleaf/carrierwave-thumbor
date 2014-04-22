@@ -1,16 +1,15 @@
 require 'spec_helper'
-class Uploader < CarrierWave::Uploader::Base
-  storage :thumbor
-end
+
 
 describe CarrierWave::Storage::Thumbor do
+
   describe 'Uploader' do
     before do
-      CarrierWave.configure do |config|
-        config.thumbor_url = 'http://localhost:8888'
+      uploader_class = Class.new CarrierWave::Uploader::Base do
+        storage :thumbor
+        thumbor_url 'http://localhost:8888'
       end
-
-      @uploader = Uploader.new
+      @uploader = uploader_class.new
       @image = open_fixture 'image.jpg'
       @identifier = "/some_hash/some_file.jpg"
     end
@@ -26,7 +25,7 @@ describe CarrierWave::Storage::Thumbor do
 
     it 'retrieve' do
       @uploader.retrieve_from_store! @identifier
-      expect(@uploader.file.url).to eq("#{@uploader.thumbor_url}/image#{@identifier}")
+      expect(@uploader.url).to eq("#{@uploader.thumbor_url}/image#{@identifier}")
     end
   end
 end

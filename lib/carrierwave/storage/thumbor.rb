@@ -14,8 +14,8 @@ module CarrierWave
           identifier_from_location location
         end
 
-        def image_url(identifier)
-          "#{thumbor_url}/image#{identifier}"
+        def image_url(identifier, options)
+          "#{thumbor_url}#{options}#{identifier}"
         end
 
         private
@@ -34,7 +34,7 @@ module CarrierWave
         end
 
         def url
-          connection.image_url identifier
+          connection.image_url identifier, options
         end
 
         def store!(file)
@@ -45,6 +45,10 @@ module CarrierWave
 
         def connection
           @connection ||= Connection.new thumbor_url: uploader.thumbor_url
+        end
+
+        def options
+          uploader.try(:thumbor_options) || '/image'
         end
 
       end

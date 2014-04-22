@@ -1,7 +1,22 @@
 module CarrierWave
   module Thumbor
-    autoload :VERSION, 'carrierwave/thumbor/version'
+    extend ActiveSupport::Autoload
+    extend ActiveSupport::Concern
+
+    autoload :VERSION
     autoload :ActiveRecord, 'carrierwave/thumbor/active_record'
+
+    module ClassMethods
+      def thumbor_options(string = nil)
+        return @thumbor_options unless string
+        @thumbor_options = string
+      end
+    end
+
+    def thumbor_options
+      partial = self.class.thumbor_options || 'image'
+      "/#{partial}"
+    end
   end
 end
 
