@@ -20,6 +20,9 @@ Or install it yourself as:
 
 TODO: Write usage instructions here
 
+
+Use `mount_thumbor_uploader` instead `mount_uploader`.
+
 ## Contributing
 
 1. Fork it ( https://github.com/[my-github-username]/carrierwave-thumbor/fork )
