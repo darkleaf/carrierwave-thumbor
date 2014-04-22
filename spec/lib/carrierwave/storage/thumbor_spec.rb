@@ -7,7 +7,7 @@ describe CarrierWave::Storage::Thumbor do
   describe 'Uploader' do
     before do
       CarrierWave.configure do |config|
-        config.thumbor_url = 'localhost:8888/image'
+        config.thumbor_url = 'http://localhost:8888'
       end
 
       @uploader = Uploader.new
@@ -26,7 +26,7 @@ describe CarrierWave::Storage::Thumbor do
 
     it 'retrieve' do
       @uploader.retrieve_from_store! @identifier
-      expect(@uploader.file.url).to eq("/image#{@identifier}")
+      expect(@uploader.file.url).to eq("#{@uploader.thumbor_url}/image#{@identifier}")
     end
   end
 end

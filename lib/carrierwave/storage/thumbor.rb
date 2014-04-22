@@ -14,6 +14,10 @@ module CarrierWave
           identifier_from_location location
         end
 
+        def image_url(identifier)
+          "#{thumbor_url}/image#{identifier}"
+        end
+
         private
 
         def identifier_from_location(location)
@@ -30,7 +34,7 @@ module CarrierWave
         end
 
         def url
-          "#{@thumbor_url}/image#{identifier}"
+          connection.image_url identifier
         end
 
         def store!(file)
