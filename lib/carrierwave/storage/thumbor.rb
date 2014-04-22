@@ -22,19 +22,19 @@ module CarrierWave
       end
 
       class File
-        attr_reader :uploader, :location
+        attr_reader :uploader, :identifier
 
-        def initialize(uploader, location = nil)
+        def initialize(uploader, identifier = nil)
           @uploader = uploader
-          @location = location
+          @identifier = identifier
         end
 
         def url
-          "#{@thumbor_url}/#{location}"
+          "#{@thumbor_url}/image#{identifier}"
         end
 
         def store!(file)
-         connection.store file
+          @identifier = connection.store file
         end
 
         private
