@@ -1,5 +1,7 @@
 # Carrierwave::Thumbor
 
+# Tumbor is not designed for permanent storage of pictures!!!
+
 TODO: Write a gem description
 
 ## Installation
